@@ -1,6 +1,6 @@
 Travis integration
 ===============
-https://magnum.travis-ci.com/pedrohh/bdi-path-finder.svg?token=pD5UfskbjibH3g2CriG5&branch=master
+[![Build Status](https://magnum.travis-ci.com/pedrohh/bdi-path-finder.svg?token=pD5UfskbjibH3g2CriG5&branch=master)](https://magnum.travis-ci.com/pedrohh/bdi-path-finder)
 
 T07 – Determinação de Percursos usando Agentes BDI
 ===============
