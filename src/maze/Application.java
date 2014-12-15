@@ -32,15 +32,17 @@ public class Application {
 
  	public static void main(String [] args)
  	{
- 		startApplication();
- 	}
- 	
- 	public static void startApplication()
- 	{
  		System.out.println("Started from main..");
-			
+ 		boolean withGui = true;
+ 				
+ 		// Deal with input
+ 		if ( args.length >= 2 )
+ 		{
+ 			if ( args[0].equals("-gui") && args[1].equals("false") ) withGui = false;	
+ 		}
+		
  		// Load 
- 		Application.loadConfigFile("map.proprietes");
+ 		Application.loadConfigFile("map.proprietes", withGui);
  		
  		// Thread
  		ThreadSuspendable sus = new ThreadSuspendable();
@@ -80,10 +82,10 @@ public class Application {
 		    
 			agentCID = cms.createComponent("agents/DriverAgentBDI.class", cInfo).getFirstResult(sus);
  			System.out.println("Started DriverAgentBDI: " + agentCID);
-		} 		
+		}
  	}
- 	
- 	public static void loadConfigFile(String file)
+
+ 	public static void loadConfigFile(String file, boolean withGui)
  	{
 		BufferedReader br = null;
 		 
@@ -148,7 +150,7 @@ public class Application {
 			}
 			
 			// Initialize gui and copy maze
-			Application.gui = new Gui(Application.driversMaze);
+			if ( withGui ) Application.gui = new Gui(Application.driversMaze);
 
 			// Parse points
 			for( String point : points )
@@ -257,7 +259,7 @@ public class Application {
 				
 				System.out.println("No map.proprietes found, a default has been created");
 				System.out.println("Edit at your will and run the program again");
-				Application.loadConfigFile("map.proprietes");
+				Application.loadConfigFile("map.proprietes", withGui);
 				return;
 			} catch (FileNotFoundException | UnsupportedEncodingException e1) {
 				// TODO Auto-generated catch block

@@ -54,7 +54,7 @@ public class WorldService implements IChatService {
 						}
 						
 						// Update gui position (moved received)
-						Application.gui.updatePositions();
+						if ( Application.gui != null ) Application.gui.updatePositions();
 						
 						break;
 				

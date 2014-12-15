@@ -116,10 +116,17 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="deploy">
+    <target name="application">
         <java classname="maze.Application" failonerror="true" fork="yes">
+            <arg line="-gui true"/>
             <classpath refid="bdi-path-finder.classpath"/>
         </java>
     </target>
-	<target name="all" depends="clean,build,deploy"/>
+    <target name="applicationNoGui">
+        <java classname="maze.Application" failonerror="true" fork="yes">
+            <arg line="-gui false"/>
+            <classpath refid="bdi-path-finder.classpath"/>
+        </java>
+    </target>
+	<target name="all" depends="clean,build,applicationNoGui"/>
 </project>

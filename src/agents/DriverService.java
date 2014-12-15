@@ -62,7 +62,7 @@ public class DriverService implements IChatService {
 							}
 							
 							// Update gui
-							Application.gui.setBlockPosition(Integer.parseInt(responseArray[3]), Integer.parseInt(responseArray[4]));
+							if ( Application.gui != null ) Application.gui.setBlockPosition(Integer.parseInt(responseArray[3]), Integer.parseInt(responseArray[4]));
 						}
 						
 						break;
