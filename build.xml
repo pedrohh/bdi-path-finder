@@ -128,5 +128,5 @@
             <classpath refid="bdi-path-finder.classpath"/>
         </java>
     </target>
-	<target name="all" depends="clean,build,applicationNoGui"/>
+	<target name="all" depends="clean,build"/>
 </project>
