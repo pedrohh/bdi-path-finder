@@ -5,6 +5,7 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="bdi-path-finder">
     <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
@@ -79,6 +80,17 @@
         <pathelement location="jadex-2.4/lib/stringtemplate-3.2.jar"/>
         <pathelement location="jadex-2.4/lib/webcam-capture-0.3.9.jar"/>
         <pathelement location="jadex-2.4/lib/xpp3-1.1.4c.jar"/>
+        <pathelement location="junit-4.12.jar"/>
+        <pathelement location="hamcrest-core-1.3.jar"/>
+    </path>
+    <path id="Maven Dependencies.libraryclasspath"/>
+    <path id="run.Application.classpath">
+        <path refid="bdi-path-finder.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.applicationNoGui.classpath">
+        <path refid="bdi-path-finder.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -116,17 +128,32 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="application">
+    <target name="Application">
         <java classname="maze.Application" failonerror="true" fork="yes">
             <arg line="-gui true"/>
-            <classpath refid="bdi-path-finder.classpath"/>
+            <classpath refid="run.Application.classpath"/>
         </java>
     </target>
     <target name="applicationNoGui">
         <java classname="maze.Application" failonerror="true" fork="yes">
             <arg line="-gui false"/>
-            <classpath refid="bdi-path-finder.classpath"/>
+            <classpath refid="run.applicationNoGui.classpath"/>
         </java>
     </target>
-	<target name="all" depends="clean,build"/>
+    <target name="TestApp1" depends="cleanall,build">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="tests.TestApp1" todir="${junit.output.dir}"/>
+            <classpath refid="bdi-path-finder.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
 </project>
