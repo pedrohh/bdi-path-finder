@@ -87,6 +87,11 @@ public class Application {
 
  	public static void loadConfigFile(String file, boolean withGui)
  	{
+ 		// Reset
+ 		driversMaze = null;
+ 		agentPoints = new Vector<DestinationPoints>();
+ 		blocks = new Vector<Point>();
+ 		Gui gui = null;
 		BufferedReader br = null;
 		 
 		try {
