@@ -1,0 +1,10 @@
+# Language
+language: java
+
+# Java jdk
+jdk:
+  - openjdk7
+  - oraclejdk7
+  
+ ## do the tests
+script: ant all

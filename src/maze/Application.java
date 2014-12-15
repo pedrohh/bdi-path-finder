@@ -31,9 +31,14 @@ public class Application {
 	public static Gui gui = null;
 
  	public static void main(String [] args)
- 	{		
+ 	{
+ 		startApplication();
+ 	}
+ 	
+ 	public static void startApplication()
+ 	{
  		System.out.println("Started from main..");
- 				
+			
  		// Load 
  		Application.loadConfigFile("map.proprietes");
  		
@@ -49,9 +54,10 @@ public class Application {
 		  "-printpass", "false"
 		};
  		
- 		String[] newargs = new String[defargs.length+args.length];
+ 		String[] newargs = new String[defargs.length];
+ 		//String[] newargs = new String[defargs.length+args.length];
  		System.arraycopy(defargs, 0, newargs, 0, defargs.length);
- 		System.arraycopy(args, 0, newargs, defargs.length, args.length);
+ 		//System.arraycopy(args, 0, newargs, defargs.length, args.length);
  		
  		 // The interface for accessing components from the outside.
  		//IExternalAccess pl = Starter.createPlatform(new String[0]).get(sus);
@@ -74,7 +80,7 @@ public class Application {
 		    
 			agentCID = cms.createComponent("agents/DriverAgentBDI.class", cInfo).getFirstResult(sus);
  			System.out.println("Started DriverAgentBDI: " + agentCID);
-		}
+		} 		
  	}
  	
  	public static void loadConfigFile(String file)
